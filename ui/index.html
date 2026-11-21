@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en" data-theme="cyber">
+<head>
+<meta charset="utf-8">
+<title>TupraQ</title>
+<link rel="icon" href="logo.svg">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="bg"></canvas>
+<div class="fx"></div>
+
+<div class="app">
+  <aside class="side">
+    <div class="brand">
+      <svg class="logo" viewBox="0 0 64 64" fill="none">
+        <path class="lg-a" d="M32 3 57 17.5v29L32 61 7 46.5v-29z" stroke-width="2.5" stroke-linejoin="round"/>
+        <circle class="lg-a" cx="32" cy="32" r="15" stroke-width="4"/>
+        <path class="lg-b" d="M41 41l9 9" stroke-width="5" stroke-linecap="round"/>
+        <path class="lg-b" d="M24.5 26h15M32 26v13" stroke-width="4.5" stroke-linecap="square"/>
+      </svg>
+      <div class="word">Tupra<span>Q</span></div>
+      <div class="tag">PC OPTIMIZER</div>
+    </div>
+    <nav id="nav">
+      <button data-page="dash" class="on"><svg viewBox="0 0 24 24"><path d="M3 3h8v8H3zM13 3h8v5h-8zM13 10h8v11h-8zM3 13h8v8H3z"/></svg>Dashboard</button>
+      <button data-page="clean"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg>Deep Clean</button>
+      <button data-page="boost"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg>Speed Boost</button>
+      <button data-page="av"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5zM9 12l2 2 4-4"/></svg>Antivirus</button>
+      <button data-page="upd"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Drivers &amp; Updates</button>
+      <button data-page="speed"><svg viewBox="0 0 24 24"><path d="M4 18a9 9 0 1 1 16 0M12 14l4-6"/><circle cx="12" cy="14" r="1.2"/></svg>Speed Test</button>
+      <button data-page="theme"><svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2.5-1.5H18a3 3 0 0 0 3-3c0-5-4-9-9-9z"/><circle cx="7.5" cy="11.5" r="1"/><circle cx="11" cy="7.5" r="1"/><circle cx="15.5" cy="8.5" r="1"/></svg>Settings</button>
+    </nav>
+    <div class="side-foot">
+      <button id="updBadge" class="btn small" hidden>Update available</button>
+      <button id="adminBadge" class="badge" title=""></button>
+      <div class="ver" id="verText">TupraQ</div>
+    </div>
+  </aside>
+
+  <main>
+    <header class="top">
+      <h1 id="pageTitle">Dashboard</h1>
+      <div class="chips">
+        <div class="chip">CPU <b id="cCpu">–</b></div>
+        <div class="chip">RAM <b id="cRam">–</b></div>
+        <div class="chip">DISK <b id="cDisk">–</b></div>
+      </div>
+    </header>
+
+    <div class="pages">
+      <!-- DASHBOARD -->
+      <section class="page on" id="p-dash">
+        <div class="panel hero">
+          <button class="orb act" id="btnOptimize" title="Clean + boost + quick virus scan">
+            <span class="ring r1"></span><span class="ring r2"></span>
+            <span class="orb-core"><b>OPTIMIZE</b><i>one click</i></span>
+          </button>
+          <div class="hero-info">
+            <h2>System status</h2>
+            <p class="muted" id="sysLine">Reading system…</p>
+            <div class="gauges">
+              <div class="gauge"><svg viewBox="0 0 80 80"><circle class="g-bg" cx="40" cy="40" r="33"/><circle class="g-fg" id="gCpu" cx="40" cy="40" r="33"/></svg><b id="gCpuT">–</b><span>CPU</span></div>
+              <div class="gauge"><svg viewBox="0 0 80 80"><circle class="g-bg" cx="40" cy="40" r="33"/><circle class="g-fg" id="gRam" cx="40" cy="40" r="33"/></svg><b id="gRamT">–</b><span>Memory</span></div>
+              <div class="gauge"><svg viewBox="0 0 80 80"><circle class="g-bg" cx="40" cy="40" r="33"/><circle class="g-fg" id="gDisk" cx="40" cy="40" r="33"/></svg><b id="gDiskT">–</b><span>Disk used</span></div>
+            </div>
+            <p class="note" id="dashNote">Press OPTIMIZE to deep clean, boost speed and run a quick virus scan.</p>
+          </div>
+        </div>
+        <div class="cards">
+          <button class="panel card" data-go="clean"><svg viewBox="0 0 24 24"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13M10 11v6M14 11v6"/></svg><b>Deep Clean</b><span>Junk, temp &amp; cache files</span></button>
+          <button class="panel card" data-go="boost"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg><b>Speed Boost</b><span>Memory, startup &amp; power</span></button>
+          <button class="panel card" data-go="av"><svg viewBox="0 0 24 24"><path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5zM9 12l2 2 4-4"/></svg><b>Antivirus</b><span>Scan &amp; remove threats</span></button>
+          <button class="panel card" data-go="upd"><svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg><b>Drivers &amp; Updates</b><span>Drivers, Windows &amp; apps</span></button>
+        </div>
+      </section>
+
+      <!-- CLEAN -->
+      <section class="page" id="p-clean">
+        <div class="panel">
+          <div class="row between">
+            <div><h2>Deep Clean</h2><p class="muted">Finds junk, temp and cache files. Your documents, downloads, passwords and browser history are never touched.</p></div>
+            <div class="row"><button class="btn ghost act" id="btnAnalyze">Analyze</button><button class="btn act" id="btnClean" disabled>Clean selected</button></div>
+          </div>
+          <div id="catList" class="list"></div>
+          <div class="total">Selected junk: <b id="cleanTotal">run Analyze first</b></div>
+        </div>
+      </section>
+
+      <!-- BOOST -->
+      <section class="page" id="p-boost">
+        <div class="panel">
+          <div class="row between">
+            <div><h2>Speed Boost</h2><p class="muted">Pick what to apply, then boost.</p></div>
+            <button class="btn act" id="btnBoost">Boost now</button>
+          </div>
+          <div class="list">
+            <label class="item"><span><b>Free up memory</b><i>Trims unused RAM held by background programs</i></span><span class="sw"><input type="checkbox" id="bRam" checked><i></i></span></label>
+            <label class="item"><span><b>Flush DNS cache</b><i>Fixes slow or stale website lookups</i></span><span class="sw"><input type="checkbox" id="bDns" checked><i></i></span></label>
+            <label class="item"><span><b>High performance power plan</b><i>Full CPU speed (uses more battery on laptops)</i></span><span class="sw"><input type="checkbox" id="bPower" checked><i></i></span></label>
+            <label class="item"><span><b>Optimize system drive</b><i>TRIM for SSD / defrag for HDD – slow, needs administrator</i></span><span class="sw"><input type="checkbox" id="bDrive"><i></i></span></label>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="row between"><div><h2>Startup apps</h2><p class="muted">Turn off apps you don't need at boot to start Windows faster. Nothing is uninstalled.</p></div><button class="btn ghost" id="btnStartupRefresh">Refresh</button></div>
+          <div id="startupList" class="list"><div class="empty">Loading…</div></div>
+        </div>
+      </section>
+
+      <!-- ANTIVIRUS -->
+      <section class="page" id="p-av">
+        <div class="panel">
+          <div class="row between">
+            <div><h2>Antivirus</h2><p class="muted">Scan engine: Microsoft Defender (built into Windows). Threats found are quarantined automatically.</p></div>
+            <div class="row"><button class="btn ghost act" id="btnAvUpdate">Update definitions</button><button class="btn ghost act" id="btnAvFull">Full scan</button><button class="btn act" id="btnAvQuick">Quick scan</button></div>
+          </div>
+          <div class="tiles" id="avTiles"><div class="empty">Reading protection status…</div></div>
+          <div id="avThreats"></div>
+        </div>
+      </section>
+
+      <!-- UPDATES -->
+      <section class="page" id="p-upd">
+        <div class="panel">
+          <div class="row between">
+            <div><h2>Drivers &amp; Windows updates</h2><p class="muted">Finds driver and system updates through Windows Update and checks your hardware for problems.</p></div>
+            <div class="row"><button class="btn ghost act" id="btnUpdScan">Scan</button><button class="btn act" id="btnUpdInstall" disabled>Install selected</button></div>
+          </div>
+          <div id="updList" class="list"><div class="empty">Press Scan to look for driver and system updates.</div></div>
+          <div id="updExtra"></div>
+        </div>
+        <div class="panel">
+          <div class="row between">
+            <div><h2>App updates</h2><p class="muted">Updates your installed programs with winget (Windows Package Manager).</p></div>
+            <div class="row"><button class="btn ghost act" id="btnAppScan">Check</button><button class="btn act" id="btnAppUp" disabled>Update all apps</button></div>
+          </div>
+          <div id="appList" class="list"><div class="empty">Press Check to list available app updates.</div></div>
+        </div>
+      </section>
+
+      <!-- SPEED TEST -->
+      <section class="page" id="p-speed">
+        <div class="panel">
+          <div class="row between">
+            <div><h2>Wi-Fi / internet speed</h2><p class="muted" id="netInfo">Measures ping, download and upload against Cloudflare's speed servers (about 20 seconds).</p></div>
+            <button class="btn act" id="btnNetTest">Start test</button>
+          </div>
+          <div class="speeds">
+            <div class="speed" id="spPing"><span>Ping</span><b>–</b><i>ms</i></div>
+            <div class="speed" id="spDown"><span>Download</span><b>–</b><i>Mbps</i></div>
+            <div class="speed" id="spUp"><span>Upload</span><b>–</b><i>Mbps</i></div>
+          </div>
+        </div>
+        <div class="panel">
+          <div class="row between">
+            <div><h2>PC speed test</h2><p class="muted">Benchmarks processor, memory and system drive (about 15 seconds). Close heavy programs first for a fair score.</p></div>
+            <button class="btn act" id="btnPcTest">Start test</button>
+          </div>
+          <div class="score-row">
+            <div class="score"><span>TupraQ score</span><b id="pcScore">–</b><i id="pcRating">not tested yet</i></div>
+            <div class="meters" id="pcMeters"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- THEMES -->
+      <section class="page" id="p-theme">
+        <div class="panel">
+          <h2>Themes</h2><p class="muted">Pick a look. It is saved for next time.</p>
+          <div class="themes" id="themeGrid"></div>
+        </div>
+        <div class="panel" id="aboutPanel">
+          <div class="row between">
+            <div><h2>TupraQ updates</h2><p class="muted" id="updStatus">Checks GitHub for a newer version of TupraQ.</p></div>
+            <div class="row"><button class="btn ghost" id="btnUpdPage">Release page</button><button class="btn act" id="btnSelfUpd">Check for updates</button></div>
+          </div>
+          <pre class="notes" id="updNotes" hidden></pre>
+        </div>
+        <div class="panel">
+          <h2>Voice &amp; shortcut</h2>
+          <div class="list">
+            <label class="item"><span><b>Voice notification</b><i>“Sir, the cleaning is done.” when a task finishes</i></span><span class="sw"><input type="checkbox" id="setVoice" checked><i></i></span></label>
+            <div class="item"><span><b>Test the voice</b><i>Plays the chime and the spoken message</i></span><button class="btn ghost" id="btnVoiceTest">Play</button></div>
+            <div class="item"><span><b>Desktop shortcut</b><i>Adds a TupraQ icon to your desktop</i></span><button class="btn ghost" id="btnShortcut">Create</button></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="console panel">
+      <div class="con-head">
+        <span class="dot" id="jobDot"></span><span id="jobTitle">READY</span>
+        <div class="bar"><i id="jobBar"></i></div>
+        <button class="btn ghost small" id="jobCancel" hidden>Cancel</button>
+      </div>
+      <pre id="log">TupraQ online. Awaiting your command, Sir.</pre>
+    </footer>
+  </main>
+</div>
+<div id="toast"></div>
+<script>window.TQ_TOKEN="__TOKEN__";</script>
+<script src="app.js"></script>
+</body>
+</html>
